@@ -1,0 +1,46 @@
+# Package Identification
+# Historically: NAME, VERSION, and RELEASE are read-only once set
+NAME="nqc"
+VERSION=4.0.3
+RELEASE=1
+
+# Package Metadata
+CATEGORY="Devel"
+SUMMARY="The Not Quite C compiler and utility for the LEGO MindStorms RCX"
+DESCRIPTION="Support not only the compiling of simple language with a C-like
+syntax that can be used to write programs for a LEGO MindStorms RCX running
+the standard LEGO firmware but also download firmware and programs and perform
+other tasks related to the RCX."
+PROJECT="${NAME}"
+HOMEPAGE="https://github.com/BrickBot/${PROJECT}"
+
+# License ID list at https://spdx.org/licenses/
+LICENSE="MPL-2.0"
+
+# File Locations
+SRC_URI="${HOMEPAGE}/archive/refs/tags/v${VERSION}.tar.gz"
+SRC_DIR="${PROJECT}-${VERSION}"
+
+
+# Build Setup
+BUILD_REQUIRES="lndir make flex bison binutils gcc-core gcc-g++"
+
+# Ignore any changes under the source directory made during compilation
+# https://cygwin.github.io/cygport/src_postinst_cygpart.html#RESTRICT
+RESTRICT="diff"
+
+src_compile() {
+  # Finagle support for out-of-path builds
+  # Replicate the source directory into the build directory by creating subdirectories and symlinking files
+  lndirs
+
+  # Change working directory to outside the source tree
+  echo "Preparing to compile source for ${NAME}-${VERSION}"
+  cd "${B}"
+  
+  # Execute the build, noting that parallel builds are unsupported
+  MAKEOPTS="${MAKEOPTS} prefix=/usr DEFAULT_SERIAL_NAME='\"/dev/ttyS0\"' DEFAULT_USB_NAME='\"/dev/usb/legousbtower0\"' DEFAULT_PORT_NAME='\"serial\"'"
+  cygmake
+}
+
+# src_install() undefined here, as the default can be used
