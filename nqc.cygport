@@ -39,7 +39,7 @@ src_compile() {
   cd "${B}"
   
   # Execute the build, noting that parallel builds are unsupported
-  MAKEOPTS="${MAKEOPTS} prefix=/usr DEFAULT_SERIAL_NAME='\"/dev/ttyS0\"' DEFAULT_USB_NAME='\"/dev/usb/legousbtower0\"' DEFAULT_PORT_NAME='\"serial\"'"
+  MAKEOPTS="${MAKEOPTS} prefix=/usr DEFAULT_SERIAL_NAME=\"/dev/ttyS0\" DEFAULT_USB_NAME=\"/dev/usb/legousbtower0\" DEFAULT_PORT_NAME=\"serial\""
   cygmake
 }
 
