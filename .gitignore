@@ -1,3 +1,6 @@
+# Directories
+nqc-*-*.*/
+
 # Executable files
 *.exe
 *.dll
