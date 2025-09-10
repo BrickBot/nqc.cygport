@@ -25,7 +25,7 @@ SRC_DIR="${NAME}-${VERSION}"
 # Build Setup
 # The h8300-hitachi-coff-toolchain is not required, but its presence enables
 #   building of files needed by NQC that would otherwise be supplied as pre-built files.
-BUILD_REQUIRES="lndirs make flex bison binutils gcc-core gcc-g++ h8300-hitachi-coff-toolchain"
+BUILD_REQUIRES="lndir make flex bison binutils gcc-core gcc-g++ h8300-hitachi-coff-toolchain"
 
 # Ignore any changes under the source directory made during compilation
 # https://cygwin.github.io/cygport/src_postinst_cygpart.html#RESTRICT
